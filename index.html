@@ -2,236 +2,91 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Relatório de Física - Método Linear</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora - Teoria de Erros (Método Linear)</title>
     <style>
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
-            background: #eef2f5;
-            margin: 0;
-            padding: 20px;
-            color: #1e2a3a;
-        }
-        .container {
-            max-width: 1300px;
-            margin: auto;
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-            overflow: hidden;
-            padding: 20px 25px 35px 25px;
-        }
-        h1 {
-            font-size: 1.8rem;
-            margin-top: 0;
-            margin-bottom: 0.25rem;
-            color: #0f3b5c;
-            border-left: 6px solid #2c7da0;
-            padding-left: 18px;
-        }
-        .subtitulo {
-            color: #2c7da0;
-            margin-bottom: 30px;
-            font-weight: 400;
-            border-bottom: 1px solid #cbd5e1;
-            padding-bottom: 8px;
-            margin-top: 5px;
-            padding-left: 24px;
-        }
-        .grid-entrada {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .card {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 16px 20px;
-            border: 1px solid #e2e8f0;
-            transition: 0.1s;
-        }
-        .card h3 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-size: 1.25rem;
-            color: #0f3b5c;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            display: block;
-            margin-top: 12px;
-            margin-bottom: 4px;
-            color: #1e2a3a;
-        }
-        input, .fake-input {
-            width: 100%;
-            padding: 10px 12px;
-            border: 1px solid #cbd5e1;
-            border-radius: 16px;
-            font-family: monospace;
-            font-size: 0.9rem;
-            background: white;
-            transition: 0.2s;
-        }
-        input:focus {
-            outline: none;
-            border-color: #2c7da0;
-            box-shadow: 0 0 0 2px rgba(44,125,160,0.2);
-        }
-        .dica {
-            font-size: 0.7rem;
-            color: #5b6e8c;
-            margin-top: 4px;
-        }
-        button {
-            background: #2c7da0;
-            color: white;
-            border: none;
-            padding: 14px 28px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            border-radius: 40px;
-            cursor: pointer;
-            width: 100%;
-            margin: 20px 0 20px;
-            transition: 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        button:hover {
-            background: #1f5e7a;
-            transform: scale(0.98);
-        }
-        .result-area {
-            background: #ffffff;
-            border-top: 2px solid #cbd5e1;
-            margin-top: 20px;
-            padding-top: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-            margin: 20px 0;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-        }
-        th {
-            background: #e6f0f5;
-            color: #0f3b5c;
-            padding: 12px 6px;
-            border: 1px solid #cbd5e1;
-        }
-        td {
-            padding: 8px 6px;
-            border: 1px solid #cbd5e1;
-            text-align: center;
-        }
-        .relatorio-texto {
-            background: #f1f5f9;
-            padding: 18px 22px;
-            border-radius: 24px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            white-space: pre-wrap;
-            margin-top: 20px;
-            border-left: 5px solid #2c7da0;
-        }
-        .footer-note {
-            font-size: 0.7rem;
-            text-align: center;
-            margin-top: 30px;
-            color: #5b6e8c;
-        }
-        @media (max-width: 700px) {
-            .container { padding: 15px; }
-            th, td { font-size: 0.7rem; }
-        }
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f2f5; margin: 20px; }
+        .container { max-width: 1400px; margin: auto; background: white; padding: 25px; border-radius: 16px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 5px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .card { background: #fafafa; border: 1px solid #ddd; border-radius: 12px; padding: 15px; }
+        label { font-weight: bold; display: block; margin-top: 10px; }
+        input { width: 100%; padding: 8px; margin-top: 4px; border: 1px solid #ccc; border-radius: 6px; }
+        button { background: #2c3e50; color: white; border: none; padding: 12px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; width: 100%; margin-top: 20px; }
+        button:hover { background: #1a252f; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+        th { background: #2c3e50; color: white; }
+        .relatorio { background: #f4f6f9; padding: 15px; border-radius: 12px; margin-top: 20px; font-family: monospace; white-space: pre-wrap; }
+        .footer { font-size: 0.8rem; text-align: center; margin-top: 30px; color: #555; }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1>📐 Laboratório de Física Experimental</h1>
-    <div class="subtitulo">Cálculo de áreas · Teoria de erros (método linear)</div>
+    <h1>📐 Laboratório de Física Experimental – Cálculo de Áreas</h1>
+    <p><strong>Método linear</strong> (soma direta de erros) – conforme orientação do professor.</p>
 
-    <div class="grid-entrada">
-        <!-- CONFIGURAÇÕES GERAIS -->
+    <div class="grid">
         <div class="card">
-            <h3>⚙️ Configurações</h3>
-            <label>Erro da Trena (mm):</label>
+            <h3>Configurações</h3>
+            <label>Erro da trena (mm):</label>
             <input type="number" id="errTrena" value="0.5" step="0.1">
-            <label>Erro da Régua (mm):</label>
+            <label>Erro da régua (mm):</label>
             <input type="number" id="errRegua" value="0.5" step="0.1">
-            <label>Nº de medições por grandeza:</label>
-            <input type="number" id="nMed" value="3" step="1" min="2" max="6">
-            <div class="dica">✔️ As medições devem ser separadas por vírgula. Ex: 1999,1997,1998</div>
+            <label>Número de medições:</label>
+            <input type="number" id="nMed" value="3" step="1" min="2">
         </div>
-
-        <!-- BANCADA - TRENA -->
         <div class="card">
-            <h3>📏 Bancada (TRENA)</h3>
-            <label>Lado A (mm) - 3 valores:</label>
+            <h3>Bancada – TRENA</h3>
+            <label>Lado A (3 valores separados por vírgula):</label>
             <input type="text" id="trenaA" placeholder="1999,1997,1998">
-            <label>Lado B (mm) - 3 valores:</label>
+            <label>Lado B (3 valores):</label>
             <input type="text" id="trenaB" placeholder="600,601,600">
         </div>
-
-        <!-- BANCADA - RÉGUA (com deslocamentos) -->
         <div class="card">
-            <h3>📐 Bancada (RÉGUA)</h3>
-            <label>Lado A (mm) - 3 valores:</label>
+            <h3>Bancada – RÉGUA</h3>
+            <label>Lado A (3 valores):</label>
             <input type="text" id="reguaA" placeholder="2001,2005,2004">
-            <label>Nº de posicionamentos no Lado A:</label>
-            <input type="number" id="posA" value="7" step="1" min="1">
-            <label>Lado B (mm) - 3 valores:</label>
+            <label>Nº posicionamentos no lado A:</label>
+            <input type="number" id="posA" value="7">
+            <label>Lado B (3 valores):</label>
             <input type="text" id="reguaB" placeholder="600,600,600">
-            <label>Nº de posicionamentos no Lado B:</label>
-            <input type="number" id="posB" value="2" step="1" min="1">
+            <label>Nº posicionamentos no lado B:</label>
+            <input type="number" id="posB" value="2">
         </div>
-
-        <!-- CILINDRO (trena e régua) -->
         <div class="card">
-            <h3>🧪 Cilindro (TRENA)</h3>
-            <label>Altura (mm):</label>
+            <h3>Cilindro – TRENA</h3>
+            <label>Altura (3 valores):</label>
             <input type="text" id="cilTrenaH" placeholder="40,40,40">
-            <label>Diâmetro (mm):</label>
+            <label>Diâmetro (3 valores):</label>
             <input type="text" id="cilTrenaD" placeholder="20,20,20">
         </div>
         <div class="card">
-            <h3>🧪 Cilindro (RÉGUA)</h3>
-            <label>Altura (mm):</label>
+            <h3>Cilindro – RÉGUA</h3>
+            <label>Altura (3 valores):</label>
             <input type="text" id="cilReguaH" placeholder="40,40,40">
-            <label>Diâmetro (mm):</label>
+            <label>Diâmetro (3 valores):</label>
             <input type="text" id="cilReguaD" placeholder="20,20,20">
-            <div class="dica">(régua sem deslocamento → m=1)</div>
         </div>
     </div>
 
-    <button id="calcularBtn">▶️ PROCESSAR DADOS (método linear)</button>
+    <button onclick="processar()">🔍 PROCESSAR DADOS (Trena e Régua)</button>
 
     <div id="resultados" style="display: none;">
-        <div class="result-area">
-            <h2>📊 Tabela de dados brutos e erros totais</h2>
-            <div id="tabelaContainer"></div>
-
-            <h2>📝 Relatório técnico (itens 5.2 a 5.7)</h2>
-            <div id="relatorioTexto" class="relatorio-texto"></div>
-        </div>
+        <h2>📊 Tabela de dados brutos e erros totais</h2>
+        <div id="tabela"></div>
+        <h2>📝 Relatório técnico (itens 5.2 a 5.7)</h2>
+        <div id="relatorio" class="relatorio"></div>
     </div>
-    <div class="footer-note">
-        ✅ Método linear conforme orientação do professor: erro instrumental = m·Δinst | erro total = εest + εinst<br>
-        Propagação de erro: ΔA = L1·ΔL2 + L2·ΔL1   |   ΔAc = 2π(R·ΔH + H·ΔR)
+    <div class="footer">
+        ✅ Método linear: erro instrumental = m·Δ_inst | erro total = ε_est + ε_inst<br>
+        Propagação: ΔA = L₁·ΔL₂ + L₂·ΔL₁ &nbsp;|&nbsp; ΔAc = 2π(R·ΔH + H·ΔR)
     </div>
 </div>
 
 <script>
-    // ========== FUNÇÕES DE CÁLCULO (MÉTODO LINEAR) ==========
+    const PI = Math.PI;
+
     function parseLista(str, esperado) {
         if(!str.trim()) return null;
         let vals = str.split(',').map(v => parseFloat(v.trim())).filter(v => !isNaN(v));
@@ -239,157 +94,137 @@
         return vals;
     }
 
-    function media(arr) {
-        return arr.reduce((a,b) => a+b, 0) / arr.length;
+    function media(arr) { return arr.reduce((a,b)=>a+b,0)/arr.length; }
+    function desvio(arr, med) {
+        if(arr.length<2) return 0;
+        let soma = arr.reduce((acc,v)=>acc+(v-med)**2,0);
+        return Math.sqrt(soma/(arr.length-1));
     }
+    function erroEst(dp, n) { return dp/Math.sqrt(n); }
+    function erroInst(erroInstVal, nPos) { return erroInstVal * nPos; }
+    function erroTotal(eEst, eInst) { return eEst + eInst; }
 
-    function desvioPadrao(arr, med) {
-        if(arr.length < 2) return 0;
-        let soma = arr.reduce((acc, val) => acc + (val - med)**2, 0);
-        return Math.sqrt(soma / (arr.length - 1));
-    }
-
-    function erroEstatistico(dp, n) {
-        return dp / Math.sqrt(n);
-    }
-
-    function erroInstrumentalLinear(erroInst, nPosicoes) {
-        return erroInst * nPosicoes;
-    }
-
-    function erroTotalLinear(erroEst, erroInst) {
-        return erroEst + erroInst;
+    function processarMedidas(vals, erroInstVal, nPos) {
+        if(!vals) return null;
+        let n = vals.length;
+        let med = media(vals);
+        let dp = desvio(vals, med);
+        let eEst = erroEst(dp, n);
+        let eInst = erroInst(erroInstVal, nPos);   // corrigido: agora erroInstVal é o número
+        let eTot = erroTotal(eEst, eInst);
+        return { valores: vals, media: med, dp, eEst, eInst, eTot };
     }
 
     function formatar(media, erro) {
-        return `${media.toFixed(3)} ± ${erro.toFixed(3)}`;
+        if (erro === 0) return `${media.toFixed(3)} ± 0,000`;
+        // arredondamento simples: erro com 2 algarismos significativos
+        let exp = Math.floor(Math.log10(erro));
+        let prec = (exp >= 0) ? 0 : -exp;
+        let erroArred = parseFloat(erro.toFixed(prec+1));
+        let mediaArred = parseFloat(media.toFixed(prec+1));
+        return `${mediaArred} ± ${erroArred}`;
     }
 
-    // Processa um conjunto de medições
-    function processarMedidas(valores, erroInstrumento, nPosicoes = 1) {
-        if(!valores || valores.length === 0) return null;
-        let n = valores.length;
-        let med = media(valores);
-        let dp = desvioPadrao(valores, med);
-        let eEst = erroEstatistico(dp, n);
-        let eInst = erroInstrumentalLinear(erroInstrumento, nPosicoes);
-        let eTot = erroTotalLinear(eEst, eInst);
-        return { valores, media: med, desvio: dp, erroEst: eEst, erroInst: eInst, erroTotal: eTot };
-    }
-
-    // ========== RENDER PRINCIPAL ==========
-    document.getElementById('calcularBtn').addEventListener('click', () => {
-        // Coleta parâmetros
-        let errTrena = parseFloat(document.getElementById('errTrena').value);
-        let errRegua = parseFloat(document.getElementById('errRegua').value);
+    function processar() {
         let nMed = parseInt(document.getElementById('nMed').value);
-
-        // Função auxiliar para ler campos com vírgulas
-        function lerCampo(id, nEsperado) {
-            let raw = document.getElementById(id).value;
-            return parseLista(raw, nEsperado);
-        }
-
-        // DADOS
-        let trenaA_vals = lerCampo('trenaA', nMed);
-        let trenaB_vals = lerCampo('trenaB', nMed);
-        let reguaA_vals = lerCampo('reguaA', nMed);
-        let reguaB_vals = lerCampo('reguaB', nMed);
-        let cilTH_vals = lerCampo('cilTrenaH', nMed);
-        let cilTD_vals = lerCampo('cilTrenaD', nMed);
-        let cilRH_vals = lerCampo('cilReguaH', nMed);
-        let cilRD_vals = lerCampo('cilReguaD', nMed);
-
+        let errT = parseFloat(document.getElementById('errTrena').value);
+        let errR = parseFloat(document.getElementById('errRegua').value);
         let posA = parseInt(document.getElementById('posA').value);
         let posB = parseInt(document.getElementById('posB').value);
 
-        // Verificação de preenchimento
-        if(!trenaA_vals || !trenaB_vals || !reguaA_vals || !reguaB_vals || !cilTH_vals || !cilTD_vals || !cilRH_vals || !cilRD_vals) {
-            alert(`Erro: Todas as medições devem conter exatamente ${nMed} valores separados por vírgula.`);
+        // Ler dados
+        let tA = parseLista(document.getElementById('trenaA').value, nMed);
+        let tB = parseLista(document.getElementById('trenaB').value, nMed);
+        let rA = parseLista(document.getElementById('reguaA').value, nMed);
+        let rB = parseLista(document.getElementById('reguaB').value, nMed);
+        let cTH = parseLista(document.getElementById('cilTrenaH').value, nMed);
+        let cTD = parseLista(document.getElementById('cilTrenaD').value, nMed);
+        let cRH = parseLista(document.getElementById('cilReguaH').value, nMed);
+        let cRD = parseLista(document.getElementById('cilReguaD').value, nMed);
+
+        if (!tA || !tB || !rA || !rB || !cTH || !cTD || !cRH || !cRD) {
+            alert(`Preencha todos os campos com exatamente ${nMed} valores separados por vírgula.`);
             return;
         }
 
-        // Processar cada conjunto
-        let resTrenaA = processarMedidas(trenaA_vals, errTrena, 1);
-        let resTrenaB = processarMedidas(trenaB_vals, errTrena, 1);
-        let resReguaA = processarMedidas(reguaA_vals, errRegua, posA);
-        let resReguaB = processarMedidas(reguaB_vals, errRegua, posB);
-        let resCilTH = processarMedidas(cilTH_vals, errTrena, 1);
-        let resCilTD = processarMedidas(cilTD_vals, errTrena, 1);
-        let resCilRH = processarMedidas(cilRH_vals, errRegua, 1);
-        let resCilRD = processarMedidas(cilRD_vals, errRegua, 1);
+        // Processar
+        let resTA = processarMedidas(tA, errT, 1);
+        let resTB = processarMedidas(tB, errT, 1);
+        let resRA = processarMedidas(rA, errR, posA);
+        let resRB = processarMedidas(rB, errR, posB);
+        let resCH = processarMedidas(cTH, errT, 1);
+        let resCD = processarMedidas(cTD, errT, 1);
+        let resRH = processarMedidas(cRH, errR, 1);
+        let resRD = processarMedidas(cRD, errR, 1);
 
-        // ========== 5.2 e 5.3 ==========
-        let areaBancada = resTrenaA.media * resTrenaB.media;
-        let erroAreaBancada = (resTrenaA.media * resTrenaB.erroTotal) + (resTrenaB.media * resTrenaA.erroTotal);
+        // Áreas bancada
+        let areaBancT = resTA.media * resTB.media;
+        let erroAreaT = (resTA.media * resTB.eTot) + (resTB.media * resTA.eTot);
+        let areaBancR = resRA.media * resRB.media;
+        let erroAreaR = (resRA.media * resRB.eTot) + (resRB.media * resRA.eTot);
 
-        // ========== 5.4 e 5.5 ==========
-        let raioMedio = resCilTD.media / 2;
-        let erroRaio = resCilTD.erroTotal / 2;
-        let areaCil = 2 * Math.PI * raioMedio * resCilTH.media;
-        let erroAreaCil = 2 * Math.PI * ( raioMedio * resCilTH.erroTotal + resCilTH.media * erroRaio );
+        // Cilindro - trena
+        let raioT = resCD.media / 2;
+        let erroRaioT = resCD.eTot / 2;
+        let areaCilT = 2 * PI * raioT * resCH.media;
+        let erroAreaCilT = 2 * PI * (raioT * resCH.eTot + resCH.media * erroRaioT);
+        // Cilindro - régua
+        let raioR = resRD.media / 2;
+        let erroRaioR = resRD.eTot / 2;
+        let areaCilR = 2 * PI * raioR * resRH.media;
+        let erroAreaCilR = 2 * PI * (raioR * resRH.eTot + resRH.media * erroRaioR);
 
-        // ========== PRECISÃO (5.7) ==========
-        let erroRelTrena = resTrenaA.erroTotal / resTrenaA.media;
-        let erroRelRegua = resReguaA.erroTotal / resReguaA.media;
-        let maisPreciso = erroRelTrena < erroRelRegua ? "TRENA" : "RÉGUA";
+        // Precisão (lado A)
+        let relT = resTA.eTot / resTA.media;
+        let relR = resRA.eTot / resRA.media;
+        let maisPreciso = relT < relR ? "TRENA" : "RÉGUA";
 
-        // ========== CONSTRUIR TABELA ==========
-        function linhaTabela(nome, dados, obs='') {
+        // Montar tabela HTML
+        function linha(nome, dados, obs='') {
             if(!dados) return '';
-            let valsStr = dados.valores.map(v => v.toFixed(1)).join(' / ');
-            return `<tr><td style="text-align:left">${nome}${obs}</td><td>${valsStr}</td><td>${dados.media.toFixed(3)}</td><td>${dados.erroTotal.toFixed(3)}</td></tr>`;
+            let vals = dados.valores.map(v=>v.toFixed(1)).join(' / ');
+            return `<tr><td style="text-align:left">${nome}${obs}</td><td>${vals}</td><td>${formatar(dados.media, dados.eTot)}</td><td>${dados.eTot.toFixed(2)}</td></tr>`;
         }
+        let htmlTabela = `<table><thead><tr><th>Grandeza / Instrumento</th><th>Medições (mm)</th><th>Média ± erro total (mm)</th><th>Erro total (mm)</th></tr></thead><tbody>
+            ${linha('Trena - Bancada Lado A', resTA)}
+            ${linha('Trena - Bancada Lado B', resTB)}
+            ${linha('Régua - Bancada Lado A', resRA, ` (${posA} pos.)`)}
+            ${linha('Régua - Bancada Lado B', resRB, ` (${posB} pos.)`)}
+            ${linha('Trena - Cilindro Altura', resCH)}
+            ${linha('Trena - Cilindro Diâmetro', resCD)}
+            ${linha('Régua - Cilindro Altura', resRH)}
+            ${linha('Régua - Cilindro Diâmetro', resRD)}
+        </tbody></table>`;
 
-        let htmlTabela = `<table>
-            <thead><tr><th>Grandeza / Instrumento</th><th>Medições (mm)</th><th>Média (mm)</th><th>Erro total ± (mm)</th></tr></thead>
-            <tbody>
-                ${linhaTabela('Trena - Bancada Lado A', resTrenaA)}
-                ${linhaTabela('Trena - Bancada Lado B', resTrenaB)}
-                ${linhaTabela('Régua - Bancada Lado A', resReguaA, ` (${posA} posições)`)}
-                ${linhaTabela('Régua - Bancada Lado B', resReguaB, ` (${posB} posições)`)}
-                ${linhaTabela('Trena - Cilindro Altura', resCilTH)}
-                ${linhaTabela('Trena - Cilindro Diâmetro', resCilTD)}
-                ${linhaTabela('Régua - Cilindro Altura', resCilRH)}
-                ${linhaTabela('Régua - Cilindro Diâmetro', resCilRD)}
-            </tbody>
-        </table>`;
+        // Relatório textual
+        let rel = `=== RELATÓRIO TÉCNICO (MÉTODO LINEAR) ===\n\n`;
+        rel += `5.2 - VALOR MÉDIO DOS COMPRIMENTOS DA BANCADA\n`;
+        rel += `TRENA:\n  Lado A: ${formatar(resTA.media, resTA.eTot)} mm (ε_est=${resTA.eEst.toFixed(3)} | ε_inst=${resTA.eInst.toFixed(3)})\n`;
+        rel += `  Lado B: ${formatar(resTB.media, resTB.eTot)} mm (ε_est=${resTB.eEst.toFixed(3)} | ε_inst=${resTB.eInst.toFixed(3)})\n`;
+        rel += `RÉGUA (${posA} pos. A / ${posB} pos. B):\n  Lado A: ${formatar(resRA.media, resRA.eTot)} mm\n  Lado B: ${formatar(resRB.media, resRB.eTot)} mm\n\n`;
+        rel += `5.3 - ÁREA DA BANCADA\n`;
+        rel += `Com TRENA: ${areaBancT.toFixed(1)} ± ${erroAreaT.toFixed(1)} mm²\n`;
+        rel += `Com RÉGUA: ${areaBancR.toFixed(1)} ± ${erroAreaR.toFixed(1)} mm²\n`;
+        rel += `Fórmula: ΔA = L1·ΔL2 + L2·ΔL1\n\n`;
+        rel += `5.4 - VALOR MÉDIO DO RAIO E ALTURA DO CILINDRO\n`;
+        rel += `TRENA: Altura = ${formatar(resCH.media, resCH.eTot)} mm, Raio = ${formatar(raioT, erroRaioT)} mm\n`;
+        rel += `RÉGUA: Altura = ${formatar(resRH.media, resRH.eTot)} mm, Raio = ${formatar(raioR, erroRaioR)} mm\n\n`;
+        rel += `5.5 - ÁREA SUPERFICIAL DO CILINDRO\n`;
+        rel += `Com TRENA: ${areaCilT.toFixed(1)} ± ${erroAreaCilT.toFixed(1)} mm²\n`;
+        rel += `Com RÉGUA: ${areaCilR.toFixed(1)} ± ${erroAreaCilR.toFixed(1)} mm²\n`;
+        rel += `Fórmula: ΔAc = 2π(R·ΔH + H·ΔR)\n\n`;
+        rel += `5.6 - FONTES DE ERRO\n`;
+        rel += `• Paralaxe na leitura.\n• Calibração dos instrumentos (${errT} mm e ${errR} mm).\n`;
+        rel += `• Deslocamento da régua (soma linear: ${posA} e ${posB} posições).\n• Irregularidades das superfícies.\n• Variação entre operadores.\n\n`;
+        rel += `5.7 - QUAL MEDIÇÃO FOI MAIS PRECISA? (Trena vs Régua no Lado A)\n`;
+        rel += `Resultado: ${maisPreciso} foi mais precisa.\n`;
+        rel += `Justificativa: Erro relativo trena = ${(relT*100).toFixed(3)}% ; régua = ${(relR*100).toFixed(3)}%. Menor erro relativo → maior precisão.\n`;
 
-        // ========== RELATÓRIO TEXTUAL ==========
-        let relatorio = `=== RELATÓRIO DE RESULTADOS - FÍSICA EXPERIMENTAL (MÉTODO LINEAR) ===\n\n`;
-        relatorio += `5.2 - VALOR MÉDIO DOS COMPRIMENTOS DA BANCADA\n`;
-        relatorio += `TRENA:\n  Lado A: ${formatar(resTrenaA.media, resTrenaA.erroTotal)} mm (ε_est=${resTrenaA.erroEst.toFixed(3)} | ε_inst=${resTrenaA.erroInst.toFixed(3)})\n`;
-        relatorio += `  Lado B: ${formatar(resTrenaB.media, resTrenaB.erroTotal)} mm (ε_est=${resTrenaB.erroEst.toFixed(3)} | ε_inst=${resTrenaB.erroInst.toFixed(3)})\n`;
-        relatorio += `RÉGUA (${posA} posições A / ${posB} posições B):\n  Lado A: ${formatar(resReguaA.media, resReguaA.erroTotal)} mm\n  Lado B: ${formatar(resReguaB.media, resReguaB.erroTotal)} mm\n\n`;
-        
-        relatorio += `5.3 - ÁREA DA BANCADA (usando TRENA)\n`;
-        relatorio += `Valor sem arredondamento: ${areaBancada.toFixed(3)} ± ${erroAreaBancada.toFixed(3)} mm²\n`;
-        relatorio += `Valor com arredondamento: ${areaBancada.toFixed(1)} ± ${erroAreaBancada.toFixed(1)} mm²\n`;
-        relatorio += `Propagação linear: ΔA = L1·ΔL2 + L2·ΔL1\n\n`;
-
-        relatorio += `5.4 - VALOR MÉDIO DO RAIO E ALTURA DO CILINDRO (TRENA)\n`;
-        relatorio += `Altura: ${formatar(resCilTH.media, resCilTH.erroTotal)} mm (ε_est=${resCilTH.erroEst.toFixed(3)} | ε_inst=${resCilTH.erroInst.toFixed(3)})\n`;
-        relatorio += `Raio: ${formatar(raioMedio, erroRaio)} mm (ε_est=${(resCilTD.erroEst/2).toFixed(3)} | ε_inst=${(resCilTD.erroInst/2).toFixed(3)})\n\n`;
-
-        relatorio += `5.5 - ÁREA SUPERFICIAL DO CILINDRO (TRENA)\n`;
-        relatorio += `Sem arredondamento: ${areaCil.toFixed(3)} ± ${erroAreaCil.toFixed(3)} mm²\n`;
-        relatorio += `Arredondado: ${areaCil.toFixed(1)} ± ${erroAreaCil.toFixed(1)} mm²\n`;
-        relatorio += `Fórmula: ΔAc = 2π(R·ΔH + H·ΔR)\n\n`;
-
-        relatorio += `5.6 - PRINCIPAIS FONTES DE ERRO\n`;
-        relatorio += `• Paralaxe (ângulo de visão na leitura).\n• Calibração dos instrumentos (${errTrena} mm e ${errRegua} mm).\n• Deslocamento da régua (soma linear dos erros: ${posA} e ${posB} posições).\n• Irregularidades da bancada e do cilindro.\n• Variação entre operadores (erro aleatório capturado pelo desvio padrão).\n\n`;
-
-        relatorio += `5.7 - QUAL MEDIÇÃO FOI MAIS PRECISA? (Trena vs Régua no Lado A)\n`;
-        relatorio += `Resultado: A medição com ${maisPreciso} foi mais precisa.\n`;
-        relatorio += `Justificativa: Erro relativo da trena = ${(erroRelTrena*100).toFixed(3)}% ; da régua = ${(erroRelRegua*100).toFixed(3)}%. `;
-        relatorio += `O menor erro relativo indica maior precisão. No método linear, a régua sofre grande acréscimo devido aos múltiplos posicionamentos (${posA} × ${errRegua} mm).`;
-
-        // Exibir
-        document.getElementById('tabelaContainer').innerHTML = htmlTabela;
-        document.getElementById('relatorioTexto').innerText = relatorio;
+        document.getElementById('tabela').innerHTML = htmlTabela;
+        document.getElementById('relatorio').innerText = rel;
         document.getElementById('resultados').style.display = 'block';
         window.scrollTo({ top: document.getElementById('resultados').offsetTop - 20, behavior: 'smooth' });
-    });
+    }
 </script>
 </body>
 </html>
